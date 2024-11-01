@@ -1,0 +1,21 @@
+<div *ngIf="showAlert" class="fixed bottom-0 left-0 top-0 right-0  bg-azul1/60 flex items-center justify-center z-10">
+  <div class="w-96 h-min bg-blanco rounded-md" >
+    <div class="flex flex-row py-4 px-5 items-center text-lg {{typeAlert.colorTitle}}">
+      <fa-icon [icon]=typeAlert.icon></fa-icon> <span class="font-bold ml-2 ">{{title}}</span>
+    </div>
+    <div class="flex flex-row justify-center py-4 px-7 font-semibold text-3xl {{typeAlert.colorBody}}">
+      {{msm}}
+    </div>
+    <menu class="flex flex-row justify-end py-5 px-5">
+      <button class="btn-warning font-medium mr-5" (click)="cancelClick()">
+        <fa-icon class="mx-2" [icon]="['fas','xmark']" size="lg"></fa-icon>
+        Cancelar
+      </button>
+      <button class="{{typeAlert.classButton}} font-medium" (click)="confirmClick()">
+        <fa-icon class="mx-2" [icon]="['fas','check']" size="lg"></fa-icon>
+        Aceptar
+      </button>
+    </menu>
+  </div>
+</div>
+

@@ -1,0 +1,72 @@
+/* You can add global styles to this file, and also import other style files */
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@font-face {
+  font-family: 'OpenSans';
+  src: url('assets/fonts/OpenSans.ttf');
+}
+
+@layer base {
+  html {
+    font-family: 'OpenSans','sans-serif';
+  }
+}
+//estilos tooltip generales
+.tooltip-container {
+  line-height: initial;
+  @apply relative
+}
+
+.tooltip-container:hover .tooltip {
+  @apply visible opacity-90
+}
+
+//estilos de los botones
+.btn-primary{
+  @apply p-2.5 text-sm rounded-md shadow-black/90 shadow-sm text-blanco bg-azul3 transition duration-500 ease-in-out hover:cursor-pointer hover:bg-azul1;
+}
+.btn-success{
+  @apply p-2.5 text-sm rounded-md shadow-black/90 shadow-sm text-blanco bg-verde3 transition duration-500 ease-in-out hover:cursor-pointer hover:bg-verde2;
+}
+.btn-danger{
+  @apply p-2.5 text-sm rounded-md shadow-black/90 shadow-sm text-blanco bg-rojo3 transition duration-500 ease-in-out hover:cursor-pointer hover:bg-rojo2;
+}
+.btn-warning{
+  @apply p-2.5 text-sm rounded-md shadow-azul1/50 shadow-sm text-azul3 bg-amarillo5/90 transition duration-500 ease-in-out hover:cursor-pointer hover:bg-amarillo1;
+}
+
+// estilos de los inputs
+.input{
+ @apply text-sm font-medium text-azul2 px-3 py-2.5 rounded-md border border-azul4 focus:shadow-azul1/20 focus:shadow-md focus:outline-none;
+}
+.input-select{
+  @apply bg-blanco;
+}
+.group-input{
+  @apply flex flex-col w-full;
+}
+.label{
+  @apply px-1 py-2 text-azul1;
+}
+
+// estilos de modal
+.modal-back{
+  @apply fixed bottom-0 left-0 top-0 right-0 bg-azul1/60 flex items-center justify-center;
+}
+.modal{
+  @apply h-min bg-blanco rounded-md;
+}
+.modal-header{
+  @apply w-full h-16 bg-blanco rounded-t-md text-azul3 font-semibold text-lg flex items-center justify-between px-4;
+}
+.modal-body{
+  @apply basis-full px-5;
+}
+.modal-footer{
+  @apply flex flex-row px-5 justify-end my-5
+}
+.modal-exit{
+  @apply text-rojo5/70 transition duration-500 ease-in-out hover:text-rojo3 hover:cursor-pointer;
+}

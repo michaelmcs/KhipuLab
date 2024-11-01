@@ -1,0 +1,40 @@
+<app-header/>
+<section class="mx-auto container h-36  bg-gris6 flex flex-col justify-center p-9">
+  <p class="text-2xl text-azul1 font-semibold">
+    Administrador
+  </p>
+  <p class="mt-3 text-azul4 font-medium">
+    Laboratorios Reservados
+  </p>
+</section>
+
+<section class="container mx-auto ">
+  <div class="mx-auto my-3 w-4/5 rounded-md border border-azul5 shadow-md p-4 h-[700px] overflow-y-scroll">
+   <app-calendar />
+  <br>
+    <table class="w-full border-collapse border border-gris6">
+      <thead class="font-semibold bg-gris6 text-azul3">
+      <tr class="border border-gris6">
+        <th class="p-3">Horas</th>
+        <th>laboratorio</th>
+      </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let booking of bookings" class="border border-gris6">
+          <td class="p-4 text-center"><span class="bg-gris7 py-2 px-8 rounded-md text-azul3 font-medium">{{formatHours(booking.booking_time_start,booking.booking_time_end)}}</span></td>
+          <td class="p-4"><p class="text-2xl font-medium text-azul4">{{booking.get_laboratory.name}}</p><p class="text-sm font-medium text-azul5">Piso:{{booking.get_laboratory.flat}}</p></td>
+        </tr>
+      </tbody>
+    </table>
+    <button (click)="modalShow()" class="mt-3 btn-primary">
+      <fa-icon class="mx-2" [icon]="['fas','floppy-disk']" size="lg"></fa-icon>
+      Agregar
+    </button>
+    <a href="{{url}}pdf?date={{dateSelect}}" target="_blank" class="ml-3 mt-3 btn-primary">
+      <fa-icon class="mx-2" [icon]="['fas','print']" size="lg"></fa-icon>
+      Imprimir
+    </a>
+  </div>
+</section>
+<modal-booking [showModal]="showModal" (showModalOut)="modalHide($event)"/>
+<app-footer/>

@@ -1,0 +1,6 @@
+.chip-select{
+  @apply py-2 px-8 rounded-md text-azul3 font-medium text-center hover:bg-gris5 hover:cursor-pointer;
+}
+.chip-disabled{
+  @apply py-2 px-8 rounded-md text-gris4 font-medium text-center hover:cursor-not-allowed;
+}

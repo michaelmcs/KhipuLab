@@ -1,0 +1,11 @@
+<div>
+  <div class="text-2xl text-azul5 font-medium text-center"> {{dateSelect.getMonthText()}} {{dateSelect.year}}</div>
+  <div class="flex flex-row justify-center items-center">
+    <div (click)="backDays()" *ngIf="backDay" class="text-azul4 hover:cursor-pointer"><fa-icon [icon]="['fas','angle-left']" size="lg"/></div>
+    <div *ngFor="let date of showDays" (click)="changeDateSelect(date)" class="flex flex-col items-center w-28 h-28 justify-center rounded-md mx-2 {{isActive(date).bg}} transition duration-500 ease-in-out hover:shadow-azul1/20 hover:shadow-md hover:cursor-pointer">
+      <span class="text-sm {{isActive(date).dayText}} font-medium mb-2">{{date.getDayText()}}</span>
+      <span class="text-5xl font-semibold {{isActive(date).dayNumber}}">{{date.getDay()}}</span>
+    </div>
+    <div (click)="nextDays()" *ngIf="nextDay" class="text-azul4 hover:cursor-pointer"><fa-icon [icon]="['fas','angle-right']" size="lg"/></div>
+  </div>
+</div>

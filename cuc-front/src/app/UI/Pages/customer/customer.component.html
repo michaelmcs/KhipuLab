@@ -1,0 +1,44 @@
+<app-header/>
+<section class="mx-auto container h-36  bg-gris6 flex flex-col justify-center p-9">
+  <p class="text-2xl text-azul1 font-semibold">
+    Administrador
+  </p>
+  <p class="mt-3 text-azul4 font-medium">
+    Usuarios
+  </p>
+</section>
+<section class="container mx-auto ">
+  <div class="mx-auto my-3 w-4/5 rounded-md border border-azul5 shadow-md p-4 h-[700px] overflow-y-scroll">
+    <table class="w-full border-collapse border border-gris6">
+      <thead class="font-semibold bg-gris6 text-azul3">
+      <tr class="border border-gris6">
+        <th class="p-3">Nombre</th>
+        <th>Tipo</th>
+        <th>Acciones</th>
+      </tr>
+      </thead>
+      <tbody>
+        <tr class="border border-gris6" *ngFor="let item of data">
+          <td class="p-4 font-medium text-xl text-azul4">
+            {{item.name}}
+          </td>
+          <td class="text-center font-medium text-azul4">
+            {{item.type == 'office' ? 'Oficina' : 'Institución (E)'}}
+          </td>
+
+          <td class="text-center">
+            <span tooltip tooltipText="Editar" (click)="editCustomer(item)"> <fa-icon class="mx-2 text-amarillo1 hover:cursor-pointer" [icon]="['fas','pen-to-square']" size="lg"></fa-icon></span>
+            <span tooltip tooltipText="Eliminar" (click)="deleteCustomer(item.id,item.name)"> <fa-icon class="mx-2 text-rojo3 hover:cursor-pointer" [icon]="['fas','trash-can']" size="lg"></fa-icon></span>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+    <button (click)="modalShow()" class="mt-3 btn-primary">
+      <fa-icon class="mx-2" [icon]="['fas','floppy-disk']" size="lg"></fa-icon>
+      Agregar
+    </button>
+  </div>
+</section>
+<modal-form-customer [showModal]="showModal" (showModalOut)="modalHide($event)" />
+<app-footer/>
+

@@ -1,0 +1,105 @@
+.tooltip {
+  visibility: hidden;
+  width: auto;
+  white-space: nowrap;
+  text-align: center;
+  border-radius: 6px;
+  font-size: small;
+  font-weight: 600;
+  padding: 7px;
+  position: absolute;
+  z-index: 1;
+  transform: translateX(-50%);
+  opacity: 0;
+  transition: opacity 0.3s;
+}
+
+.tooltip-POSITION-TYPE{
+  top: -160%;
+  left: 50%;
+  @apply bg-azul1 text-blanco shadow-black/30 shadow-md;
+  &::before {
+    content: '';
+    width: 0;
+    height: 0;
+    border-width: 5px;
+    border-style: solid;
+    //border-color: #000000 transparent transparent  transparent;
+    @apply border-t-azul1 border-r-transparent border-b-transparent border-l-transparent ;
+    position: absolute;
+    left: calc(50% - 8px);
+    top: 100%;
+  }
+}
+
+.tooltip-top-TYPE{
+  top: -160%;
+  left: 50%;
+  @apply bg-azul1 text-blanco shadow-black/30 shadow-md;
+  &::before {
+    content: '';
+    width: 0;
+    height: 0;
+    border-width: 5px;
+    border-style: solid;
+    //border-color: #000000 transparent transparent  transparent;
+    @apply border-t-azul1 border-r-transparent border-b-transparent border-l-transparent ;
+    position: absolute;
+    left: calc(50% - 8px);
+    top: 100%;
+  }
+}
+
+.tooltip-left-TYPE{
+  top: -10%;
+  left: -5%;
+  @apply bg-azul1 text-blanco shadow-black/30 shadow-md;
+  &::before {
+    content: '';
+    width: 0;
+    height: 0;
+    border-width: 5px;
+    border-style: solid;
+    //border-color: #000000 transparent transparent  transparent;
+    @apply border-t-transparent border-r-transparent border-b-transparent border-l-azul1 ;
+    position: absolute;
+    left: calc(100%);
+    top: 33%;
+  }
+}
+
+.tooltip-right-TYPE{
+  top: -10%;
+  left: 105%;
+  @apply bg-azul1 text-blanco shadow-black/30 shadow-md;
+  &::before {
+    content: '';
+    width: 0;
+    height: 0;
+    border-width: 5px;
+    border-style: solid;
+    //border-color: #000000 transparent transparent  transparent;
+    @apply border-t-transparent border-r-azul1 border-b-transparent border-l-transparent ;
+    position: absolute;
+    left: calc(-5% - 8px);
+    top: 33%;
+  }
+}
+
+.tooltip-bottom-TYPE{
+  top: 105%;
+  left: 50%;
+  @apply bg-azul1 text-blanco shadow-black/30 shadow-md;
+  &::before {
+    content: '';
+    width: 0;
+    height: 0;
+    border-width: 5px;
+    border-style: solid;
+    //border-color: #000000 transparent transparent  transparent;
+    @apply border-t-transparent border-r-transparent border-b-azul1 border-l-transparent ;
+    position: absolute;
+    left: calc(50% - 8px);
+    top: calc(-15% - 8px);
+  }
+}

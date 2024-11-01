@@ -1,0 +1,50 @@
+<div *ngIf="showModal" class="modal-back" @openModal>
+  <div class="w-1/2 modal">
+    <div class="modal-header" >
+      Reservar Laboratorio
+      <span (click)="changeOut()" class="modal-exit" ><fa-icon [icon]="['fas','circle-xmark']" size="lg"></fa-icon></span>
+    </div>
+    <div class="modal-body">
+      <form [formGroup]="dataForm">
+        <div class="flex w-full mb-2">
+          <div class="group-input">
+            <label class="label">Laboratorio:</label>
+            <select class="input input-select" formControlName="laboratory">
+              <option value="0">Seleccionar</option>
+              <option *ngFor="let item of laboratories" value="{{item.id}}">{{item.name}}</option>
+            </select>
+          </div>
+        </div>
+        <div class="flex w-full mb-2">
+          <div class="group-input">
+            <label class="label">Usuario:</label>
+            <select class="input input-select" formControlName="user_lab">
+              <option value="0">Seleccionar</option>
+              <option *ngFor="let item of customers" value="{{item.user_lab.id}}">{{item.name}}</option>
+            </select>
+          </div>
+        </div>
+        <div class="flex w-full mb-2">
+          <div class="group-input">
+            <label class="label">Horarios:</label>
+            <select-hours formControlName="selectHours"/>
+          </div>
+        </div>
+        <div class="flex w-full mb-2">
+          <div class="group-input">
+            <label class="label">Motivo:</label>
+            <input class="input" formControlName="reason"/>
+          </div>
+        </div>
+      </form>
+    </div>
+    <div class="modal-footer">
+      <button  class="btn-warning mx-5" >
+        <fa-icon class="mx-2" [icon]="['fas','circle-xmark']" size="lg"></fa-icon> <span class="font-semibold">Cancelar</span>
+      </button>
+      <button  class="btn-primary" (click)="guardar()">
+        <fa-icon class="mx-2" [icon]="['fas','floppy-disk']" size="lg"></fa-icon> <span class="font-semibold">Aceptar</span>
+      </button>
+    </div>
+  </div>
+</div>

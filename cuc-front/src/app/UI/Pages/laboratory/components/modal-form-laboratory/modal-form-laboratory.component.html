@@ -1,0 +1,43 @@
+<div *ngIf="showModal" class="modal-back" @openModal>
+  <div class="w-1/2 modal">
+    <div class="modal-header" >
+      {{titleType}} Laboratorio
+      <span (click)="changeOut()" class="modal-exit" ><fa-icon [icon]="['fas','circle-xmark']" size="lg"></fa-icon></span>
+    </div>
+    <div class="modal-body">
+      <form [formGroup]="dataForm">
+        <div class="flex w-full mb-2">
+          <div class="group-input">
+            <label class="label">Nombre:</label>
+            <input formControlName="name" type="text" class="input" />
+          </div>
+          <div class="group-input ml-3">
+            <label class="label">Piso:</label>
+            <input formControlName="flat" type="text" class="input" />
+          </div>
+        </div>
+        <div class="flex w-full ">
+          <div class="group-input">
+            <label class="label">N° de Equipos:</label>
+            <input formControlName="num_pc" type="text" class="input" />
+          </div>
+          <div class="group-input ml-2">
+            <label class="label">Estado:</label>
+            <select formControlName="status_lab" class="input input-select">
+              <option value="available">En operaciones</option>
+              <option value="unavailable">En mantenimiento</option>
+            </select>
+          </div>
+        </div>
+      </form>
+    </div>
+    <div class="modal-footer">
+      <button (click)="changeOut()" class="btn-warning mx-5" >
+        <fa-icon class="mx-2" [icon]="['fas','circle-xmark']" size="lg"></fa-icon> <span class="font-semibold">Cancelar</span>
+      </button>
+      <button (click)="saveLaboratory()" class="btn-primary" >
+        <fa-icon class="mx-2" [icon]="['fas','floppy-disk']" size="lg"></fa-icon> <span class="font-semibold">{{textBtnType}}</span>
+      </button>
+    </div>
+  </div>
+</div>
