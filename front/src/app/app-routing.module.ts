@@ -10,27 +10,27 @@ const routes: Routes = [
   {
     path:'',
     component:HomeComponent,
-    title:'Home page | CUC'
+    title:'Home page | GLAB'
   },
   {
     path:'login',
     component:LoginComponent,
-    title:'Login | CUC'
+    title:'Login |  GLAB'
   },
   {
     path:'laboratorios',
     component:LaboratoryComponent,
-    title:'Laboratorios | CUC'
+    title:'Laboratorios |  GLAB'
   },
   {
     path:'reservas',
     component:BookingComponent,
-    title:'Reservas | CUC'
+    title:'Reservas |  GLAB'
   },
   {
     path:'usuarios',
     component: CustomerComponent,
-    title: 'Usuarios | CUC'
+    title: 'Usuarios |  GLAB'
   }
 ];
 
