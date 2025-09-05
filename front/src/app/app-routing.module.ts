@@ -1,37 +1,47 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
-import {HomeComponent} from "./UI/Pages/home/home.component";
-import {LaboratoryComponent} from "./UI/Pages/laboratory/laboratory.component";
-import {BookingComponent} from "./UI/Pages/booking/booking.component";
-import {CustomerComponent} from "./UI/Pages/customer/customer.component";
-import {LoginComponent} from "./UI/Pages/login/login.component";
+
+import { HomeComponent } from './UI/Pages/home/home.component';
+import { LaboratoryComponent } from './UI/Pages/laboratory/laboratory.component';
+import { BookingComponent } from './UI/Pages/booking/booking.component';
+import { CustomerComponent } from './UI/Pages/customer/customer.component';
+import { LoginComponent } from './UI/Pages/login/login.component';
+import { QuipuPageComponent } from './UI/Pages/quipu-page/quipu-page.component';
 
 const routes: Routes = [
   {
-    path:'',
-    component:HomeComponent,
-    title:'Home page | GLAB'
+    path: '',
+    component: HomeComponent,
+    title: 'Home page | GLAB'
   },
   {
-    path:'login',
-    component:LoginComponent,
-    title:'Login |  GLAB'
+    path: 'login',
+    component: LoginComponent,
+    title: 'Login | GLAB'
   },
   {
-    path:'laboratorios',
-    component:LaboratoryComponent,
-    title:'Laboratorios |  GLAB'
+    path: 'laboratorios',
+    component: LaboratoryComponent,
+    title: 'Laboratorios | GLAB'
   },
   {
-    path:'reservas',
-    component:BookingComponent,
-    title:'Reservas |  GLAB'
+    path: 'reservas',
+    component: BookingComponent,
+    title: 'Reservas | GLAB'
   },
   {
-    path:'usuarios',
+    path: 'usuarios',
     component: CustomerComponent,
-    title: 'Usuarios |  GLAB'
-  }
+    title: 'Usuarios | GLAB'
+  },
+  // Nueva ruta Quipu
+  {
+    path: 'quipu',
+    component: QuipuPageComponent,
+    title: 'Quipu | GLAB'
+  },
+  // Opcional: redirección para rutas no encontradas
+  { path: '**', redirectTo: '', pathMatch: 'full' }
 ];
 
 @NgModule({

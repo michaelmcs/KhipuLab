@@ -1,19 +1,27 @@
-<header class="h-20 container mx-auto shadow-md flex justify-between items-center px-2 ">
-   <img class="w-16" alt="Logo CUC" src="../../../../assets/images/logo.png" height="400" width="400"/>
-    <div>
-      <button [routerLink]="'/reservas'"  class="h-11 text-azul1 px-1.5 m-3 rounded transition duration-300 ease-in-out hover:shadow-md hover:cursor-pointer hover:bg-azul1 hover:text-blanco">
-        Reservas
-      </button>
-      <button [routerLink]="'/laboratorios'"  class="h-11 text-azul1 px-1.5 m-3 rounded transition duration-300 ease-in-out hover:shadow-md hover:cursor-pointer hover:bg-azul1 hover:text-blanco">
-        Laboratorios
-      </button>
-      <button [routerLink]="'/usuarios'"  class="h-11 text-azul1 px-1.5 m-3 rounded transition duration-300 ease-in-out hover:shadow-md hover:cursor-pointer hover:bg-azul1 hover:text-blanco">
-        usuarios
-      </button>
-      <button [routerLink]="'/login'"  class="h-11 text-azul1 px-1.5 rounded transition duration-300 ease-in-out hover:shadow-md hover:cursor-pointer hover:bg-azul1 hover:text-blanco">
-        <fa-icon class="mx-2" [icon]="['fas','right-to-bracket']" size="lg"></fa-icon>
-        Ingresar
-      </button>
-    </div>
+<header class="h-20 container mx-auto shadow-md flex justify-between items-center px-2">
+  <img class="w-16" alt="Logo CUC" src="../../../../assets/images/logo.png" height="400" width="400"/>
 
+  <div>
+    <button [routerLink]="'/reservas'" class="h-11 text-azul1 px-1.5 m-3 rounded transition duration-300 ease-in-out hover:shadow-md hover:cursor-pointer hover:bg-azul1 hover:text-blanco">
+      Reservas
+    </button>
+
+    <button [routerLink]="'/laboratorios'" class="h-11 text-azul1 px-1.5 m-3 rounded transition duration-300 ease-in-out hover:shadow-md hover:cursor-pointer hover:bg-azul1 hover:text-blanco">
+      Laboratorios
+    </button>
+
+    <button [routerLink]="'/usuarios'" class="h-11 text-azul1 px-1.5 m-3 rounded transition duration-300 ease-in-out hover:shadow-md hover:cursor-pointer hover:bg-azul1 hover:text-blanco">
+      Usuarios
+    </button>
+
+    <!-- NUEVO: Botón Quipu -->
+    <button [routerLink]="'/quipu'" class="h-11 text-azul1 px-1.5 m-3 rounded transition duration-300 ease-in-out hover:shadow-md hover:cursor-pointer hover:bg-azul1 hover:text-blanco">
+      Quipu
+    </button>
+
+    <button [routerLink]="'/login'" class="h-11 text-azul1 px-1.5 rounded transition duration-300 ease-in-out hover:shadow-md hover:cursor-pointer hover:bg-azul1 hover:text-blanco">
+      <fa-icon class="mx-2" [icon]="['fas','right-to-bracket']" size="lg"></fa-icon>
+      Ingresar
+    </button>
+  </div>
 </header>

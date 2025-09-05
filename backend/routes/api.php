@@ -3,6 +3,12 @@
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
+
+use App\Http\Controllers\QuipuController;
+
+
+
+
 /*
 |--------------------------------------------------------------------------
 | API Routes
@@ -18,6 +24,12 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
     return $request->user();
 });
 
+// routes/api.php
+Route::get('/quipu/by-code/{code}', [QuipuController::class, 'showByCode']);
+Route::post('/quipu/{id}/events', [QuipuController::class, 'storeEvent']);   // NUEVO
+Route::get('/quipu/{id}/verify', [QuipuController::class, 'verifyChain']); 
+
+Route::get('/quipu/{id}', [QuipuController::class, 'show']);
 Route::post('laboratory',[\App\Http\Controllers\LaboratoryController::class,'store']);
 Route::get ('laboratory/{laboratory}',[\App\Http\Controllers\LaboratoryController::class,'show']);
 Route::get ('laboratory',[\App\Http\Controllers\LaboratoryController::class,'index']);

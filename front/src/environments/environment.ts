@@ -1,4 +1,4 @@
 export const environment = {
-  api:'http://cuc.unap.edu.pe/back/api/',
-  host:'http://cuc.unap.edu.pe/back/',
+  api:'http://KhipuLab.com.pe/back/api/',
+  host:'http://KhipuLab.com.pe/back/',
 };

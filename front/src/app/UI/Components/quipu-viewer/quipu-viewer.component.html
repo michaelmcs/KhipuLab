@@ -1,0 +1,12 @@
+<div *ngIf="loading">Cargando…</div>
+<div *ngIf="error" class="text-red-600">{{ error }}</div>
+
+<div *ngIf="!loading && !error">
+  <h2 class="font-semibold mb-2">Muestra: {{ sampleCode }}</h2>
+  <ul class="list-disc pl-6">
+    <li *ngFor="let n of nodes">
+      cord={{ n.cord }} · knot={{ n.knot }} · {{ n.label }}
+      <small class="text-gray-500" *ngIf="n.occurred_at">({{ n.occurred_at }})</small>
+    </li>
+  </ul>
+</div>
