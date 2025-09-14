@@ -3,6 +3,7 @@ import { BrowserModule } from '@angular/platform-browser';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { ReactiveFormsModule, FormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
+import { DatePipe } from '@angular/common';
 
 import { AppRoutingModule } from './app-routing.module';
 import { TooltipModule } from './tooltip/tooltip.module';
@@ -33,58 +34,47 @@ import { ModalFormCustomerComponent } from './UI/Pages/customer/components/modal
 
 import { LoginComponent } from './UI/Pages/login/login.component';
 
-// Quipu
 import { QuipuViewerComponent } from './UI/Components/quipu-viewer/quipu-viewer.component';
 import { QuipuPageComponent } from './UI/Pages/quipu-page/quipu-page.component';
+
+import { LabSampleComponent } from './lab-sample/lab-sample.component';
 
 @NgModule({
   declarations: [
     AppComponent,
-    // Layout / shared
     HeaderComponent,
     FooterComponent,
     ConfirmComponent,
-
-    // Home
     HomeComponent,
     SliderComponent,
     CifrasComponent,
     SoftwareComponent,
-
-    // Laboratory
     LaboratoryComponent,
     ModalFormLaboratoryComponent,
-
-    // Booking
     BookingComponent,
     CalendarComponent,
     ModalBookingComponent,
     SelectHoursComponent,
-
-    // Customers
     CustomerComponent,
     ModalFormCustomerComponent,
-
-    // Auth
     LoginComponent,
-
-    // Quipu
     QuipuViewerComponent,
-    QuipuPageComponent
+    QuipuPageComponent,
+    LabSampleComponent 
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
     BrowserAnimationsModule,
     ReactiveFormsModule,
-    FormsModule,            // <- para [(ngModel)]
+    FormsModule,
     HttpClientModule,
-    IconsModule,            // <- tu módulo que registra los íconos
-    FontAwesomeModule,      // <- necesario para <fa-icon>
+    IconsModule,
+    FontAwesomeModule,
     NgParticlesModule,
     TooltipModule
   ],
-  providers: [],
+  providers: [DatePipe],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

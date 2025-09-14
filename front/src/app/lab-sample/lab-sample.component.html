@@ -1,0 +1,35 @@
+<div class="lab-sample-container">
+  <header class="header">
+    <h1>Gestión de Muestras</h1>
+  </header>
+
+  <div *ngIf="samples.length > 0; else noSamples" class="sample-list">
+    <h2>Lista de Muestras</h2>
+    <ul class="samples">
+      <li *ngFor="let sample of samples" class="sample-item">
+        <p><strong>ID:</strong> {{ sample.id }} | <strong>Código:</strong> {{ sample.code }}</p>
+        <button class="btn" (click)="getSampleQuipu(sample.id)">Ver Quipu</button>
+        <button class="btn" (click)="verifySampleChain(sample.id)">Verificar Cadena</button>
+        <button class="btn" (click)="addEvent(sample.id, { eventType: 'new_event', state: 'pending' })">Añadir Evento</button>
+      </li>
+    </ul>
+  </div>
+
+
+  <ng-template #noSamples>
+    <p class="no-samples-message">No hay muestras disponibles. Por favor, añade una muestra.</p>
+  </ng-template>
+
+  <div class="add-sample-form">
+    <h2>Añadir Nueva Muestra</h2>
+    <form (ngSubmit)="addNewSample()">
+      <label for="code">Código de Muestra:</label>
+      <input type="text" id="code" [(ngModel)]="newSample.code" name="code" required class="input-field">
+      
+      <label for="specimenType">Tipo de Especimen:</label>
+      <input type="text" id="specimenType" [(ngModel)]="newSample.specimenType" name="specimenType" required class="input-field">
+      
+      <button type="submit" class="btn-submit">Añadir Muestra</button>
+    </form>
+  </div>
+</div>

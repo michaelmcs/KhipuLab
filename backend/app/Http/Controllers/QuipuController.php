@@ -1,10 +1,7 @@
 <?php
-
 namespace App\Http\Controllers;
-
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
-
 class QuipuController extends Controller
 {
    
@@ -18,9 +15,6 @@ class QuipuController extends Controller
         if (!$sample) {
             return response()->json(['message' => 'Sample not found'], 404);
         }
-
-        // Mapea trace_events -> nodes esperados por el front:
-        // cord = quipu_cord, knot = quipu_knot, label = COALESCE(state, event_type), occurred_at = timestamp
         $nodes = DB::table('trace_events')
             ->select([
                 'id',
@@ -40,15 +34,12 @@ class QuipuController extends Controller
             'nodes'  => $nodes,
         ]);
     }
-
-   // app/Http/Controllers/QuipuController.php
-
 public function storeEvent(Request $req, int $id)
 {
     $data = $req->validate([
         'event_type'  => 'required|string|max:255',
         'state'       => 'nullable|string|max:255',
-        'occurred_at' => 'required|date',         // ISO 8601 o 'Y-m-d H:i:s'
+        'occurred_at' => 'required|date',  
         'quipu_cord'  => 'required|integer|min:0',
         'quipu_knot'  => 'required|integer|min:0',
         'quipu_color' => 'nullable|string|max:32',
@@ -57,17 +48,13 @@ public function storeEvent(Request $req, int $id)
         'payload'     => 'nullable|array',
         'attestation' => 'nullable|array',
     ]);
-
-    // verifica que la muestra exista
     $sample = \DB::table('lab_samples')->where('id', $id)->first();
     if (!$sample) return response()->json(['message' => 'Sample not found'], 404);
-
     $payload      = $data['payload'] ?? [];
     $payloadHash  = hash('sha256', json_encode($payload, JSON_UNESCAPED_UNICODE|JSON_UNESCAPED_SLASHES));
     $prevHash     = \DB::table('trace_events')->where('lab_sample_id', $id)->orderByDesc('id')->value('chain_hash') ?? '';
     $chainParts   = $prevHash.'|'.$data['occurred_at'].'|'.$payloadHash.'|'.$data['quipu_cord'].'|'.$data['quipu_knot'];
     $chainHash    = hash('sha256', $chainParts);
-
     $insert = [
         'lab_sample_id'  => $id,
         'event_type'     => $data['event_type'],
@@ -86,17 +73,14 @@ public function storeEvent(Request $req, int $id)
         'created_at'     => now(),
         'updated_at'     => now(),
     ];
-
     $eventId = \DB::table('trace_events')->insertGetId($insert);
     return response()->json(['id' => $eventId, 'chain_hash' => $chainHash], 201);
 }
-
 public function verifyChain(int $id)
 {
     $events = \DB::table('trace_events')
         ->where('lab_sample_id', $id)
         ->orderBy('id')->get();
-
     $prev = '';
     foreach ($events as $e) {
         $payload = $e->payload ? json_decode($e->payload, true) : [];
@@ -111,21 +95,17 @@ public function verifyChain(int $id)
         }
         $prev = $e->chain_hash;
     }
-
     return response()->json(['valid' => true, 'count' => $events->count()], 200);
 }
-
     public function showByCode(string $code)
     {
         $sample = DB::table('lab_samples')
             ->select('id', 'code')
             ->where('code', $code)
             ->first();
-
         if (!$sample) {
             return response()->json(['message' => 'Sample not found'], 404);
         }
-
         $nodes = DB::table('trace_events')
             ->select([
                 'id',
@@ -139,7 +119,6 @@ public function verifyChain(int $id)
             ->orderBy('quipu_knot')
             ->orderBy('occurred_at')
             ->get();
-
         return response()->json([
             'sample' => $sample,
             'nodes'  => $nodes,

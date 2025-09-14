@@ -7,6 +7,7 @@ import { BookingComponent } from './UI/Pages/booking/booking.component';
 import { CustomerComponent } from './UI/Pages/customer/customer.component';
 import { LoginComponent } from './UI/Pages/login/login.component';
 import { QuipuPageComponent } from './UI/Pages/quipu-page/quipu-page.component';
+import { LabSampleComponent } from './lab-sample/lab-sample.component';  
 
 const routes: Routes = [
   {
@@ -34,14 +35,21 @@ const routes: Routes = [
     component: CustomerComponent,
     title: 'Usuarios | GLAB'
   },
-  // Nueva ruta Quipu
   {
     path: 'quipu',
     component: QuipuPageComponent,
     title: 'Quipu | GLAB'
   },
-  // Opcional: redirección para rutas no encontradas
-  { path: '**', redirectTo: '', pathMatch: 'full' }
+  {
+    path: 'gestionar-muestras',
+    component: LabSampleComponent,  // Ruta para gestionar muestras
+    title: 'Gestionar Muestras | GLAB'
+  },
+  { 
+    path: '**', 
+    redirectTo: '', 
+    pathMatch: 'full' 
+  } // Ruta para manejar el caso de rutas no encontradas
 ];
 
 @NgModule({

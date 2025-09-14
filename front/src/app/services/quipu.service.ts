@@ -33,25 +33,17 @@ export interface VerifyResponse {
 
 @Injectable({ providedIn: 'root' })
 export class QuipuService {
-  // Cambia el host/puerto si tu backend Laravel está en otro lugar
   private baseUrl = 'http://127.0.0.1:8000/api';
-
   constructor(private http: HttpClient) {}
-
-  /** Obtener el quipu (nodos + sample) */
   getQuipu(id: number): Observable<QuipuResponse> {
     return this.http.get<QuipuResponse>(`${this.baseUrl}/quipu/${id}`);
   }
-
-  /** Crear un evento en la cadena del quipu */
   addEvent(sampleId: number, body: NewEvent): Observable<AddEventResponse> {
     return this.http.post<AddEventResponse>(
       `${this.baseUrl}/quipu/${sampleId}/events`,
       body
     );
   }
-
-  /** Verificar la cadena del quipu */
   verify(sampleId: number): Observable<VerifyResponse> {
     return this.http.get<VerifyResponse>(
       `${this.baseUrl}/quipu/${sampleId}/verify`

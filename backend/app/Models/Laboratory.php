@@ -18,3 +18,5 @@ class Laboratory extends Model
     ];
     protected $keyType = 'string';
 }
+
+

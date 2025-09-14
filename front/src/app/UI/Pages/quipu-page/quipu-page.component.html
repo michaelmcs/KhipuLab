@@ -1,36 +1,178 @@
 <app-header></app-header>
 
-<div class="container mx-auto p-4">
-  <h1 class="text-xl font-bold mb-4">Quipu</h1>
+<div class="container mx-auto p-6">
 
-  <label class="block mb-2">ID de muestra</label>
-  <input
-    type="number"
-    [(ngModel)]="sampleId"
-    class="border p-2 rounded w-60"
-    placeholder="Ingrese ID"
-  />
+  <h1 class="text-4xl font-bold mb-6 text-center text-blue-700 uppercase tracking-wide">
+    Módulo de Quipu
+  </h1>
 
-  <div class="mt-4">
-    <app-quipu-viewer *ngIf="sampleId" [sampleId]="sampleId"></app-quipu-viewer>
+  <div class="mb-6 flex flex-col items-start md:flex-row md:items-center gap-4">
+    <label class="block text-lg font-medium">ID de Muestra:</label>
+    <input
+      type="number"
+      [(ngModel)]="sampleId"
+      class="border p-3 rounded w-full max-w-sm focus:outline-none focus:ring-2 focus:ring-blue-400"
+      placeholder="Ingrese el ID de muestra"
+    />
+    <button
+      class="mt-2 md:mt-0 px-5 py-3 rounded bg-green-500 text-white font-semibold hover:bg-green-600 transition"
+      (click)="loadEvents()"
+    >
+      Cargar Eventos
+    </button>
+  </div>
+  <div class="mt-6">
+    <app-quipu-viewer
+      *ngIf="sampleId"
+      [sampleId]="sampleId"
+      class="border rounded shadow p-4 bg-gray-50"
+    ></app-quipu-viewer>
   </div>
 
-  <!-- 👇 aquí pegamos tu bloque -->
-  <div class="mt-8 border-t pt-4" *ngIf="sampleId">
-    <h3 class="font-semibold mb-2">Nuevo evento</h3>
-    <div class="grid gap-2 grid-cols-2 max-w-xl">
-      <input class="border p-2 rounded" placeholder="event_type" [(ngModel)]="form.event_type">
-      <input class="border p-2 rounded" placeholder="state" [(ngModel)]="form.state">
-      <input class="border p-2 rounded" type="datetime-local" placeholder="occurred_at" [(ngModel)]="form.occurred_at">
-      <input class="border p-2 rounded" type="number" placeholder="quipu_cord" [(ngModel)]="form.quipu_cord">
-      <input class="border p-2 rounded" type="number" placeholder="quipu_knot" [(ngModel)]="form.quipu_knot">
-      <input class="border p-2 rounded" placeholder="quipu_color" [(ngModel)]="form.quipu_color">
+  <div class="mt-10" *ngIf="events.length > 0">
+    <h3 class="font-semibold mb-4 text-2xl text-blue-600 border-b pb-2">
+      Eventos Registrados para Muestra
+    </h3>
+    <div class="overflow-x-auto">
+      <table class="table-auto w-full text-left border border-gray-300 rounded-lg shadow-sm">
+        <thead class="bg-blue-100">
+          <tr>
+            <th class="px-4 py-3 border-b text-blue-700">Tipo de Evento</th>
+            <th class="px-4 py-3 border-b text-blue-700">Estado</th>
+            <th class="px-4 py-3 border-b text-blue-700">Fecha</th>
+            <th class="px-4 py-3 border-b text-blue-700">Payload Hash</th>
+            <th class="px-4 py-3 border-b text-blue-700">Chain Hash</th>
+          </tr>
+        </thead>
+        <tbody class="bg-white">
+          <tr *ngFor="let event of events" class="hover:bg-gray-50">
+            <td class="px-4 py-2 border-b">{{ event.event_type }}</td>
+            <td class="px-4 py-2 border-b">
+              <span 
+                class="px-2 py-1 rounded font-semibold text-white"
+                [ngClass]="{
+                  'bg-yellow-500': event.state === 'pending',
+                  'bg-green-500': event.state === 'active',
+                  'bg-blue-500': event.state === 'completed',
+                  'bg-gray-500': event.state === 'archived'
+                }"
+              >
+                {{ event.state | titlecase }}
+              </span>
+            </td>
+            <td class="px-4 py-2 border-b">{{ event.occurred_at | date:'dd/MM/yyyy HH:mm' }}</td>
+            <td class="px-4 py-2 border-b break-all font-mono">{{ event.payload_hash }}</td>
+            <td class="px-4 py-2 border-b break-all font-mono">{{ event.chain_hash }}</td>
+          </tr>
+        </tbody>
+      </table>
     </div>
-    <div class="mt-3 flex gap-2">
-      <button class="px-3 py-2 rounded bg-azul1 text-white" (click)="crearEvento()">Guardar evento</button>
-      <button class="px-3 py-2 rounded border" (click)="verificar()">Verificar cadena</button>
+  </div>
+
+  <div class="mt-12 border-t pt-8" *ngIf="sampleId">
+    <h3 class="font-semibold mb-6 text-2xl text-blue-600 border-b pb-2">
+      Registrar Nuevo Evento
+    </h3>
+
+    <div class="grid grid-cols-1 md:grid-cols-2 gap-6 max-w-2xl mx-auto">
+
+      <div class="form-group">
+        <label for="event_type" class="font-medium">Tipo de Evento:</label>
+        <input
+          type="text"
+          id="event_type"
+          [(ngModel)]="newEvent.event_type"
+          class="form-control p-3 border rounded w-full focus:outline-none focus:ring-2 focus:ring-blue-400"
+          placeholder="Ej: Creación, Modificación, Inspección"
+          required
+        />
+      </div>
+
+      <div class="form-group">
+        <label for="state" class="font-medium">Estado:</label>
+        <select
+          id="state"
+          [(ngModel)]="newEvent.state"
+          class="form-control p-3 border rounded w-full focus:outline-none focus:ring-2 focus:ring-blue-400"
+        >
+          <option value="pending">Pendiente</option>
+          <option value="active">Activo</option>
+          <option value="completed">Completado</option>
+          <option value="archived">Archivado</option>
+        </select>
+      </div>
+
+      <div class="form-group">
+        <label for="occurred_at" class="font-medium">Fecha de Evento:</label>
+        <input
+          type="datetime-local"
+          id="occurred_at"
+          [(ngModel)]="newEvent.occurred_at"
+          class="form-control p-3 border rounded w-full focus:outline-none focus:ring-2 focus:ring-blue-400"
+          required
+        />
+      </div>
+
+      <div class="form-group">
+        <label for="quipu_cord" class="font-medium">Cordón de Quipu:</label>
+        <input
+          type="number"
+          id="quipu_cord"
+          [(ngModel)]="newEvent.quipu_cord"
+          class="form-control p-3 border rounded w-full focus:outline-none focus:ring-2 focus:ring-blue-400"
+          required
+        />
+      </div>
+
+      <div class="form-group">
+        <label for="quipu_knot" class="font-medium">Nudo de Quipu:</label>
+        <input
+          type="number"
+          id="quipu_knot"
+          [(ngModel)]="newEvent.quipu_knot"
+          class="form-control p-3 border rounded w-full focus:outline-none focus:ring-2 focus:ring-blue-400"
+          required
+        />
+      </div>
+
+      <div class="form-group col-span-1 md:col-span-2">
+        <label for="payload" class="text-lg font-semibold text-gray-700">Metadatos (JSON):</label>
+        <textarea
+          id="payload"
+          [(ngModel)]="newEvent.payload"
+          class="form-control p-4 border rounded-lg w-full h-64 resize-none mt-2 font-mono focus:outline-none focus:ring-2 focus:ring-blue-400"
+          placeholder='{"info": "Nuevo evento para muestra"}'
+        ></textarea>
+      </div>
+
+      <div class="flex flex-col md:flex-row gap-6 mt-6 justify-center">
+        <button
+          type="button"
+          class="px-6 py-3 rounded bg-blue-500 text-white hover:bg-blue-600 font-semibold transition shadow"
+          (click)="registerEvent()"
+        >
+          Guardar Evento
+        </button>
+        <button
+          type="button"
+          class="px-6 py-3 rounded border border-gray-300 text-blue-600 hover:bg-blue-100 font-semibold transition shadow"
+          (click)="verify()"
+        >
+          Verificar Cadena
+        </button>
+      </div>
+
+      <div class="mt-6 text-center text-lg font-bold"
+           [ngClass]="{
+             'text-green-600': msg.includes('éxito') || msg.includes('Cadena Verificada'),
+             'text-red-600': msg.includes('Error') || msg.includes('Inválida'),
+             'text-yellow-600': msg.includes('Pendiente')
+           }"
+           *ngIf="msg">
+        {{ msg }}
+      </div>
+
     </div>
-    <div class="mt-2 text-sm text-gray-600" *ngIf="msg">{{ msg }}</div>
   </div>
 </div>
 

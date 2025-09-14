@@ -9,9 +9,6 @@ use Illuminate\Http\Request;
 
 class UserLabController extends Controller
 {
-    //
-
-
     public function index()
     {
         return response()->json(UserLab::all(),200);

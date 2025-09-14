@@ -1,0 +1,24 @@
+<div *ngIf="loading" class="loading">
+  <p>Cargando...</p>
+</div>
+
+<div *ngIf="!loading && events.length > 0">
+  <h2>Eventos de la Muestra</h2>
+  <div *ngFor="let event of events">
+    <div class="event-details">
+      <p><strong>Tipo de Evento:</strong> {{ event.event_type }}</p>
+      <p><strong>Estado:</strong> {{ event.state }}</p>
+      <!-- <p><strong>Fecha:</strong> {{ event.occurred_at | date:'dd/MM/yyyy HH:mm' }}</p> -->
+      <p><strong>Payload Hash:</strong> {{ event.payload_hash }}</p>
+      <p><strong>Chain Hash:</strong> {{ event.chain_hash }}</p>
+    </div>
+  </div>
+</div>
+
+<div *ngIf="!loading && events.length === 0">
+  <p>No se encontraron eventos para esta muestra.</p>
+</div>
+
+<div *ngIf="!loading && !events">
+  <p>No se encontró la muestra.</p>
+</div>
